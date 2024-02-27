@@ -25,15 +25,17 @@ const injectContext = PassedComponent => {
 		);
 		const [ user, setUser ] = useState({});
 		
-		function handleCallbackResponse (response) {
-			console.log ("Encoded JWT ID token: " + response.credential);
-			var userObject = jwtDecode (response.credential);
-			console.log (userObject);
-			setUser (userObject);
-		}
+		
 
 		useEffect(() => {
-			google.accounts.id.initialize ({
+			
+			function handleCallbackResponse (response) {
+				console.log ("Encoded JWT ID token: " + response.credential);
+				var userObject = jwtDecode (response.credential);
+				console.log (userObject);
+				setUser (userObject);
+			}
+			 google.accounts.id.initialize ({
 				client_id: "533568438503-75kgn3gkshmbrlnhsg2ithfchvc10ebi.apps.googleusercontent.com",
 				callback: handleCallbackResponse
 			});
@@ -41,7 +43,7 @@ const injectContext = PassedComponent => {
 			google.accounts.id.renderButton (
 				document.getElementById("signInDiv"),
 				{ theme:"outline", size: "large"}
-			)
+			) 
 			
 
 			//create function to check if user is still logged in

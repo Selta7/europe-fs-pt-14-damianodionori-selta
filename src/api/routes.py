@@ -32,6 +32,18 @@ def handle_hello():
 
     return jsonify(response_body), 200
 
+@api.route("/users/<string:user_email>", methods=["GET"])
+def get_users(user_email):
+    try: 
+        user_information = User.query.filter_by(email=user_email).first()
+        if user_information: 
+            return jsonify({"message": "Email is found"})
+        else:
+            return jsonify({"message": "Email is not found"}), 404
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
 
 @api.route("/signup", methods=["POST"])
 def signup():

@@ -14,20 +14,7 @@ const SignUpForm = ({openLoginModal}) => {
     const [errorMessage, setErrorMessage] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const toLogin = useNavigate();
-    //for google login
-
-    // useEffect(() => {
-    //     const signInDiv = document.getElementById("signInDiv");
-    //     if (signInDiv) {
-    //         google.accounts.id.renderButton(signInDiv, {
-    //             theme: "outline",
-    //             size: "large"
-    //         });
-    //     } else {
-    //         console.error("Failed to find signInDiv element.");
-    //     }
-    // }, []);
-
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
 

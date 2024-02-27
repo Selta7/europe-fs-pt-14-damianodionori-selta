@@ -31,6 +31,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					if (!response.ok) {
 						const errorData = await response.json().catch(() => ({}));
 						console.error('Signup failed:', errorData);
+						console.log(response)
 						setStore({ message: errorData.error || 'Signup failed. Please try again.' });
 					} else {
 						const data = await response.json().catch(() => ({}));
@@ -42,7 +43,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				} catch (error) {
 					console.error('Error during signup:', error);
-					setStore({ message: 'Signup failed. Please try again.' });
+					setStore({ message: 'Signup failed and caught. Please try again.' });
 				}
 			},
 			
@@ -59,6 +60,8 @@ const getState = ({ getStore, getActions, setStore }) => {
                     // Extract user data from the authentication response
                     const profile = googleUser.getBasicProfile();
                     const idToken = googleUser.getAuthResponse().id_token;
+
+					
 
                     // Update the application state
                     setStore({ 
