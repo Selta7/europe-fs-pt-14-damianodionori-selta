@@ -26,15 +26,70 @@ const injectContext = PassedComponent => {
 		const [ user, setUser ] = useState({});
 		
 		
+		const checkEmail = async (email) => {
+			try {
+				const response = await fetch(process.env.BACKEND_URL + "/api/users/" + email);
+				const data = await response.json();
+				
+				if (data.message == 'true') {
+					// Email exists, call the login function here
+					console.log("Email exists:", data);
+					// await handleGoogleLogin(userObject.email);
+				} else {
+					// Email does not exist, call the signup function here
+					console.log("Email does not exist:", data);
+					// Call the signup function here
+					// Then call the login function with just the email to create the token.
+				}
+				
+				return data;
+			} catch (error) {
+				console.error('Error checking if email exists:', error);
+			}
+		}
+		
+		const handleGoogleLogin = async () => {
+			try {
+			console.log("test")
+			  const response = await fetch(process.env.BACKEND_URL + "/api/login", {
+				method: "POST",
+				headers: {
+				  "Content-Type": "application/json",
+				},
+				body: JSON.stringify({ email }),
+			  });
+			  
+			  if (!response.ok) {
+				throw new Error('Login failed. Please check your email and password.');
+			  }
+			  
+			  const data = await response.json();
+				  
+			  localStorage.setItem("accessToken", data.access_token)
+		  
+			  setAccessToken(data.access_token);
+			  setIsLoggedIn(true);
+			  
+			  navigate(`/privatePage`);
+			  
+			
+		  
+			} catch (error) {
+			  console.error('Error during login:', error);
+			  alert(error.message); // Display alert for error message
+			}
+		  }
+
+        async function handleCallbackResponse(response) {
+            console.log("Encoded JWT ID token: " + response.credential);
+            var userObject = jwtDecode(response.credential);
+            console.log(userObject);
+            //here we use the object returned to sign up or login the user.
+            checkEmail(userObject.email);
+        }
+		
 
 		useEffect(() => {
-			
-			function handleCallbackResponse (response) {
-				console.log ("Encoded JWT ID token: " + response.credential);
-				var userObject = jwtDecode (response.credential);
-				console.log (userObject);
-				setUser (userObject);
-			}
 			 google.accounts.id.initialize ({
 				client_id: "533568438503-75kgn3gkshmbrlnhsg2ithfchvc10ebi.apps.googleusercontent.com",
 				callback: handleCallbackResponse

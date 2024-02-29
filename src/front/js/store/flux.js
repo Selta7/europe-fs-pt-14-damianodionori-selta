@@ -47,8 +47,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 			
+
 			 // New action to handle Google login
-			 googleLogin: async () => {
+			 /* googleLogin: async () => {
                 try {
                     await gapi.auth2.init({
                         client_id: "533568438503-75kgn3gkshmbrlnhsg2ithfchvc10ebi.apps.googleusercontent.com",
@@ -58,16 +59,8 @@ const getState = ({ getStore, getActions, setStore }) => {
                     const googleUser = await authInstance.signIn();
 
                     // Extract user data from the authentication response
-                    const profile = googleUser.getBasicProfile();
-                    const idToken = googleUser.getAuthResponse().id_token;
-
-					
-
-                    // Update the application state
-                    setStore({ 
-                        accessToken: idToken,
-                        isLoggedIn: true,
-                    });
+                	googleUser.getBasicProfile();
+                   	googleUser.getAuthResponse().id_token;
 
                     // Optionally, perform additional actions after successful login
 
@@ -75,7 +68,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     console.error('Error during Google login:', error);
                     // Handle error
                 }
-            },
+            }, */
 
 
 			setIsLoggedIn: (isLoggedIn) => {
