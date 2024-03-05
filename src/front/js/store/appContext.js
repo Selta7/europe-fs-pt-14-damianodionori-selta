@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import getState from "./flux.js";
 import { jwtDecode } from "jwt-decode";
 
+
 // Don't change, here is where we initialize our context, by default it's just going to be null.
 export const Context = React.createContext(null);
 
@@ -26,32 +27,37 @@ const injectContext = PassedComponent => {
 		const [ user, setUser ] = useState({});
 		
 		
-		const checkEmail = async (email) => {
+		const checkEmail = async (email, name) => {
 			try {
 				const response = await fetch(process.env.BACKEND_URL + "/api/users/" + email);
 				const data = await response.json();
 				
 				if (data.message == 'true') {
 					// Email exists, call the login function here
+					await handleGoogleLogin(email);
 					console.log("Email exists:", data);
-					// await handleGoogleLogin(userObject.email);
+					
 				} else {
 					// Email does not exist, call the signup function here
 					console.log("Email does not exist:", data);
 					// Call the signup function here
 					// Then call the login function with just the email to create the token.
-				}
+					 await state.actions.signup({
+						first_name: name,
+						email: email,
+					});
+					await handleGoogleLogin(email);
 				
-				return data;
+					return data;}
 			} catch (error) {
 				console.error('Error checking if email exists:', error);
 			}
 		}
 		
-		const handleGoogleLogin = async () => {
+		const handleGoogleLogin = async (email) => {
 			try {
-			console.log("test")
-			  const response = await fetch(process.env.BACKEND_URL + "/api/login", {
+			
+			  const response = await fetch(process.env.BACKEND_URL + "/api/GoogleLogin" , {
 				method: "POST",
 				headers: {
 				  "Content-Type": "application/json",
@@ -67,32 +73,32 @@ const injectContext = PassedComponent => {
 				  
 			  localStorage.setItem("accessToken", data.access_token)
 		  
-			  setAccessToken(data.access_token);
-			  setIsLoggedIn(true);
-			  
-			  navigate(`/privatePage`);
-			  
-			
+			  state.actions.setAccessToken(data.access_token);
+			  state.actions.setIsLoggedIn(true);
+			    
 		  
 			} catch (error) {
 			  console.error('Error during login:', error);
 			  alert(error.message); // Display alert for error message
 			}
 		  }
+		
+			
 
+		  //put in flux
         async function handleCallbackResponse(response) {
             console.log("Encoded JWT ID token: " + response.credential);
             var userObject = jwtDecode(response.credential);
             console.log(userObject);
             //here we use the object returned to sign up or login the user.
-            checkEmail(userObject.email);
+            checkEmail(userObject.email, userObject.name);
         }
 		
 
 		useEffect(() => {
 			 google.accounts.id.initialize ({
 				client_id: "533568438503-75kgn3gkshmbrlnhsg2ithfchvc10ebi.apps.googleusercontent.com",
-				callback: handleCallbackResponse
+				callback: handleCallbackResponse //state.actions.handle
 			});
 		
 			google.accounts.id.renderButton (

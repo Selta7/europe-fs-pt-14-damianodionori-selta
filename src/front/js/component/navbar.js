@@ -16,9 +16,6 @@ export const Navbar = () => {
   let [searchParams, setSearchParams] = useSearchParams();
   const { store, actions } = useContext(Context);
   
-  /* const handleGoogleLogin = () => {
-    actions.googleLogin(); // Trigger the googleLogin action to initiate Google Sign-In
-}; */
 
   useEffect(() => {
     if (searchParams.get("openLogin"))

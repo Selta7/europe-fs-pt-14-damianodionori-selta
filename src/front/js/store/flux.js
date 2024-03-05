@@ -46,30 +46,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					setStore({ message: 'Signup failed and caught. Please try again.' });
 				}
 			},
-			
-
-			 // New action to handle Google login
-			 /* googleLogin: async () => {
-                try {
-                    await gapi.auth2.init({
-                        client_id: "533568438503-75kgn3gkshmbrlnhsg2ithfchvc10ebi.apps.googleusercontent.com",
-                        scope: 'email profile openid',
-                    });
-                    const authInstance = gapi.auth2.getAuthInstance();
-                    const googleUser = await authInstance.signIn();
-
-                    // Extract user data from the authentication response
-                	googleUser.getBasicProfile();
-                   	googleUser.getAuthResponse().id_token;
-
-                    // Optionally, perform additional actions after successful login
-
-                } catch (error) {
-                    console.error('Error during Google login:', error);
-                    // Handle error
-                }
-            }, */
-
 
 			setIsLoggedIn: (isLoggedIn) => {
 				const store = getStore();
