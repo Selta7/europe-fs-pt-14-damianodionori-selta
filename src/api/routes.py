@@ -32,6 +32,19 @@ def handle_hello():
 
     return jsonify(response_body), 200
 
+@api.route("/users/<string:user_email>", methods=["GET"])
+def get_users(user_email):
+    try: 
+        user_information = User.query.filter_by(email=user_email).first()
+        if user_information: 
+            return jsonify({"message": "true"}), 200
+        else:
+            return jsonify({"message": "False"}), 404
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+
 
 @api.route("/signup", methods=["POST"])
 def signup():
@@ -48,13 +61,17 @@ def signup():
     existing_user = User.query.filter_by(email=email).first()
     if existing_user:
        return jsonify({"error": "Email is already in use"}), 400
-
-    hashed_password = get_hash(password)
-
-    new_user = User(
+    if password:
+        hashed_password = get_hash(password)
+        new_user = User(
         first_name=first_name,
         email=email,
         password=hashed_password,
+    )
+        
+    new_user = User(
+        first_name = first_name,
+        email=email,
     )
     
     db.session.add(new_user)
@@ -82,6 +99,17 @@ def login():
 
     return jsonify(access_token=access_token, user_id=user.id)
 
+@api.route("/GoogleLogin", methods=["POST"])
+def GoogleLogin():
+    email = request.json.get("email", None)
+    user = User.query.filter_by( email=email ).first()
+
+    if not user :
+        return jsonify({"error": "Invalid email or password"}), 401
+
+    access_token = create_access_token(identity={"email": email, "user_id": user.id}, expires_delta=datetime.timedelta(hours=6))
+
+    return jsonify(access_token=access_token, user_id=user.id)
 
 @api.route("/logout", methods=["POST"])
 @jwt_required()

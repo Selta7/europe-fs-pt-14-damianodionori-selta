@@ -31,6 +31,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					if (!response.ok) {
 						const errorData = await response.json().catch(() => ({}));
 						console.error('Signup failed:', errorData);
+						console.log(response)
 						setStore({ message: errorData.error || 'Signup failed. Please try again.' });
 					} else {
 						const data = await response.json().catch(() => ({}));
@@ -42,38 +43,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				} catch (error) {
 					console.error('Error during signup:', error);
-					setStore({ message: 'Signup failed. Please try again.' });
+					setStore({ message: 'Signup failed and caught. Please try again.' });
 				}
 			},
-			
-			 // New action to handle Google login
-			 googleLogin: async () => {
-                try {
-                    await gapi.auth2.init({
-                        client_id: "533568438503-75kgn3gkshmbrlnhsg2ithfchvc10ebi.apps.googleusercontent.com",
-                        scope: 'email profile openid',
-                    });
-                    const authInstance = gapi.auth2.getAuthInstance();
-                    const googleUser = await authInstance.signIn();
-
-                    // Extract user data from the authentication response
-                    const profile = googleUser.getBasicProfile();
-                    const idToken = googleUser.getAuthResponse().id_token;
-
-                    // Update the application state
-                    setStore({ 
-                        accessToken: idToken,
-                        isLoggedIn: true,
-                    });
-
-                    // Optionally, perform additional actions after successful login
-
-                } catch (error) {
-                    console.error('Error during Google login:', error);
-                    // Handle error
-                }
-            },
-
 
 			setIsLoggedIn: (isLoggedIn) => {
 				const store = getStore();

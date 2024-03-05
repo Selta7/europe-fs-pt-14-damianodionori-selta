@@ -1,12 +1,19 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import "../../styles/home.css";
+import { useNavigate } from 'react-router-dom';
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
+	const navigate = useNavigate();
+	let loggedIn = store.isLoggedIn
 
-
+	useEffect(() => {
+		if (loggedIn) {
+			navigate(`/privatePage`);
+		}
+	}, [loggedIn]);
 	return (
 		<div className="home-container">
 			<div className="bg position-relative text-center">
