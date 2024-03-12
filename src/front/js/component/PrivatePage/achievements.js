@@ -4,39 +4,68 @@ import { faMedal, faTrophy, faCrown } from '@fortawesome/free-solid-svg-icons';
 
 const Achievements = () => {
 
-    const [savedItineraries, setSavedItineraries] = useState(0);
-    
-    useEffect(() => {
-        // Implement logic to fetch saved itineraries count from backend or local storage
-        // and update the state.
-        // Example: const savedItinerariesCount = fetchSavedItinerariesCount();
-        // setSavedItineraries(savedItinerariesCount);
-      }, []);
-    
-      const checkAndDisplayBadge = (threshold, badgeText) => {
-        if (savedItineraries >= threshold) {
-          return (
-            <div key={threshold}>
-              <p>Congratulations! {badgeText}</p>
-              {/* Add badge image or any other visual representation */}
-            </div>
-          );
+  const [savedItineraries, setSavedItineraries] = useState(0);
+
+  useEffect(() => {
+    const fetchSavedItinerariesCount = async () => {
+      try {
+        const response = await fetch('/api/getSavedItinerariesCount');
+        if (response.ok) {
+          const data = await response.json();
+          return data.savedItinerariesCount;
+        } else {
+          throw new Error('Failed to fetch saved itineraries count');
         }
-        return null;
-      };
-    
-      return (
-        <div>
-          {/* Display total saved itineraries count */}
-          <p>Total Saved Itineraries: {savedItineraries}</p>
-    
-          {/* Display badges based on achievement thresholds */}
-          {savedItineraries === 0 && <p>No achievements yet.</p>}
-          {checkAndDisplayBadge(1, 'You\'ve earned a badge for saving 1 itinerary.')}
-          {checkAndDisplayBadge(3, 'You\'ve earned an additional badge for saving 3 itineraries.')}
-          {checkAndDisplayBadge(5, 'You\'ve earned an additional badge for saving 5 itineraries.')}
+      } catch (error) {
+        console.error('Error fetching saved itineraries count:', error.message);
+        return 0;
+      }
+    };
+
+    // Call the function to fetch saved itineraries count and update the state
+    fetchSavedItinerariesCount()
+      .then(count => setSavedItineraries(count))
+      .catch(error => console.error('Error setting saved itineraries count:', error));
+  }, []);
+
+  const checkAndDisplayBadges = () => {
+    const badges = [];
+
+    if (savedItineraries >= 1) {
+      badges.push(
+        <div key={1}>
+          <p>Congratulations! You've earned a badge for saving 1 itinerary.</p>
+          <FontAwesomeIcon icon={faMedal} />
         </div>
       );
-    };
-    
-    export default Achievements;
+    }
+    if (savedItineraries >= 3) {
+      badges.push(
+        <div key={3}>
+          <p>Congratulations! You've earned an additional badge for saving 3 itineraries.</p>
+          <FontAwesomeIcon icon={faTrophy} />
+        </div>
+      );
+    }
+    if (savedItineraries >= 5) {
+      badges.push(
+        <div key={5}>
+          <p>Congratulations! You've earned an additional badge for saving 5 itineraries.</p>
+          <FontAwesomeIcon icon={faCrown} />
+        </div>
+      );
+    }
+
+    return badges.length > 0 ? badges : <p>No achievements yet.</p>;
+  };
+
+  return (
+    <div>
+      <p>Total Saved Itineraries: {savedItineraries}</p>
+      {checkAndDisplayBadges()}
+    </div>
+  );
+};
+
+
+export default Achievements;
