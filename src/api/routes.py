@@ -68,10 +68,10 @@ def signup():
         email=email,
         password=hashed_password,
     )
-        
-    new_user = User(
-        first_name = first_name,
-        email=email,
+    else:    
+        new_user = User(
+            first_name = first_name,
+            email=email,
     )
     
     db.session.add(new_user)
