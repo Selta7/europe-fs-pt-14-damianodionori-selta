@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Mappedays from './Mappedays.js';
 
 
 function Bookmark({ savedItineraries, activeTab }) {
@@ -32,23 +33,17 @@ function Bookmark({ savedItineraries, activeTab }) {
 
               <div id="collapse1" className={`collapse ${openAcor === index ? 'show' : ''}`} aria-labelledby={`heading${index}`} data-parent="#accordion">
                 <div className="card-body" id='bookmap'>
-                  {itinerary.data.map((day, dayIndex) => (
-                    <div className="mapped" key={dayIndex}>
-                      <div className='days'> <h3>Day {dayIndex + 1}</h3> </div>
-                      <div className='itinerary'>
-                        <div className='object'><strong>Accommodation</strong> {day.accommodation}</div> <br />
-                        <div className='object'><strong>Activities</strong></div>
-                        <ul>
-                          {day.activities.map((activity, i) => (
-                            <li key={i}>{activity}</li>
-                          ))}
-                        </ul>
-                        <div className='object'> <strong>Lunch</strong> {day.lunch}</div> <br />
-                        <div className='object'> <strong>Dinner</strong> {day.dinner}</div> <br />
-                        <div className='object'> <strong>Transportation</strong> {day.transportation}</div>
-                      </div>
-                      {dayIndex < itinerary.data.length - 1 && <hr className='day-divider' />}
-                    </div>
+                   {itinerary.data.map((day, dayIndex) => (
+                    <Mappedays 
+                    day = {dayIndex + 1} 
+                    index= {dayIndex} 
+                    itineraryLength = {itinerary.data.length}
+                    accommodation = {day.accommodation}
+                    activities = {day.activities}
+                    lunch = {day.lunch}
+                    dinner = {day.dinner}
+                    transportation = {day.transportation}
+                    />
                   ))}
                 </div>
               </div>
