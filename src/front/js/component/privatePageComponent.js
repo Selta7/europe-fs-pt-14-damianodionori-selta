@@ -5,11 +5,13 @@ import { Link, useNavigate } from 'react-router-dom';
 import Password from './PrivatePage/password.js';
 import Bookmark from './PrivatePage/bookmark.js';
 import { Context } from "../store/appContext";
+import Achievements from './PrivatePage/achievements.js';
 
 
 const PrivatePage = () => {
     const [activeTab, setActiveTab] = useState('basic-info');
     const [savedItineraries, setSavedItineraries] = useState([]);
+    const [itinerariesCount, setItinerariesCount] = useState(0);
     const { store, actions } = useContext(Context);
     const [showModal, setShowModal] = useState(false);
     const [userData, setUserData] = useState(null);
@@ -82,6 +84,7 @@ const PrivatePage = () => {
                     const result = await response.json();
                     console.log(result)
                     setSavedItineraries(result.itineraries);
+                    
                 } else {
                     console.error('Error fetching saved itineraries:', response.statusText);
                 }
@@ -99,6 +102,10 @@ const PrivatePage = () => {
         setActiveTab(tabId);
     };
 
+    //useEffect to count the number of itineraries
+    //setItinerariesCount(savedItineraries.length);
+    //console.log(itinerariesCount);
+    //[savedItineraries]
     
     return (
         <div className="container">
@@ -193,7 +200,7 @@ const PrivatePage = () => {
                         <Bookmark savedItineraries={savedItineraries} activeTab={activeTab} />
                     </div>
                     <div className={`tab-pane fade show ${activeTab === 'achievements' ? 'active' : ''}`} id="achievements">
-                        <p>No Achievements yet</p>
+                        <Achievements />
                     </div>
                     <div className={`tab-pane fade show ${activeTab === 'itinerary' ? 'active' : ''}`} id="itinerary">
                         <p>Create Itinerary Content Goes Here</p>
