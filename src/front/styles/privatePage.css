@@ -198,7 +198,7 @@ label {
 
   #collapse1 {
     background-color: #FFA500;
-  
+    border-radius: 8px;
   }
 
   ul {
@@ -211,8 +211,15 @@ label {
     border-radius: 5px;
     padding: 16px;
     margin-bottom: 16px;
+    display: flex;
+    flex-direction: row;
+    overflow-x: scroll;
+    max-width: 536px;
   }
-
+  #mapday{
+    min-width: 500px;
+    margin-right: 16px;
+  }
   .card-header1 {
     background-color: #FFA500;
     display: flex;
@@ -221,6 +228,7 @@ label {
     padding: 8px;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+    min-width: 536px;
   }
 
   .minheight {
