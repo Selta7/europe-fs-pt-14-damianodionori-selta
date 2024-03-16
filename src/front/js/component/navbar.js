@@ -57,12 +57,10 @@ export const Navbar = () => {
     <>
       <nav className="navbar navbar fixed-top p-0">
         <div className="container-fluid p-1">
-            
-
           <a className="navbar-brand" href="/">
             <img src={logoOrange} alt="Logo" />
           </a>
-          <img src={avatar} alt="Logo" />
+          <img src={avatar} id="dio" alt="Logo" />
           <button
             className="navbar-toggler "
             type="button"
