@@ -5,6 +5,7 @@ import "../../styles/navbar.css";
 import logoOrange from "../../img/logoOrange.png";
 import Login from "./login";
 import { Context } from "../store/appContext";
+import avatar from "../../img/avatar.gif";
 
 export const Navbar = () => {
 
@@ -56,10 +57,12 @@ export const Navbar = () => {
     <>
       <nav className="navbar navbar fixed-top p-0">
         <div className="container-fluid p-1">
+            
+
           <a className="navbar-brand" href="/">
             <img src={logoOrange} alt="Logo" />
           </a>
-
+          <img src={avatar} alt="Logo" />
           <button
             className="navbar-toggler "
             type="button"
