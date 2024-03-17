@@ -102,10 +102,9 @@ const PrivatePage = () => {
         setActiveTab(tabId);
     };
 
-    //useEffect to count the number of itineraries
-    //setItinerariesCount(savedItineraries.length);
-    //console.log(itinerariesCount);
-    //[savedItineraries]
+    useEffect(() => {
+        setItinerariesCount(savedItineraries.length);
+    }, [savedItineraries]);
     
     return (
         <div className="container">
