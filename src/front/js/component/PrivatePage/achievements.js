@@ -3,9 +3,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMedal, faTrophy, faCrown } from '@fortawesome/free-solid-svg-icons';
 
 
-const Achievements = () => {
+const Achievements = ({ savedItineraries }) => {
 
-  const [savedItineraries, setSavedItineraries] = useState(0);
+  
   
   const checkAndDisplayBadges = () => {
     const badges = [];
