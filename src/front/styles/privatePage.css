@@ -197,7 +197,7 @@ label {
   }
 
   #collapse1 {
-    background-color: #FFA500;
+    background-color: #fff6e5;
     border-radius: 8px;
   }
 
@@ -207,7 +207,7 @@ label {
   }
 
   #bookmap {
-    background-color: #FFA500;
+    background-color: #fff6e5;
     border-radius: 5px;
     padding: 16px;
     margin-bottom: 16px;
@@ -219,9 +219,20 @@ label {
   #mapday{
     min-width: 500px;
     margin-right: 16px;
+    background-color: white;
   }
+  #dayprop {
+    color: #FFA500;
+    font-weight: bolder;
+    font-size: 32px;
+  }
+  #objprop {
+    background-color: white;
+
+  }
+
   .card-header1 {
-    background-color: #FFA500;
+    background-color: #fff6e5;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -236,4 +247,9 @@ label {
     min-height: 100vh;
     z-index: -2;
     padding-bottom: 48px;
+  }
+
+  .iconsmall {
+    width: 20px;
+    height: 20px;
   }
