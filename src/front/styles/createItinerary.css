@@ -53,13 +53,10 @@ body {
 .answer-item {
   margin: 8px 0;
   padding: 8px;
-  border-radius: 5px;
-  background-color: #ffa500;
-  color: black;
+  color: white;
   font-weight: bold;
   font-size: 16px;
   text-align: center;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 
@@ -72,7 +69,7 @@ body {
   font-size: 14px;
   outline: none;
   transition: border-color 0.3s ease-in-out;
-  max-width: 50%;
+  width: 164px;
 }
 .input-buttons {
   display: flex;
@@ -94,7 +91,7 @@ body {
   font-size: 16px;
   transition: background-color 0.3s ease-in-out;
   margin-top: 16px;
-  max-width: 25%;
+  width: 164px;
 
 }
 .nbutton{
@@ -157,7 +154,7 @@ body {
 
 .back-button {
   padding: 8px 16px;
-  background-color: #FF8C00;
+  background-color: gray;
   color: white;
   border: none;
   border-radius: 5px;
@@ -224,6 +221,7 @@ body {
   max-width: 600px;
   background-color: #ffa500;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 8px;
 }
 
 .generated-itinerary h2 {

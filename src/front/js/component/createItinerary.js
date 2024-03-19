@@ -206,7 +206,7 @@ const CreateItinerary = () => {
             <div className="card1 col-6">
               <div className='avatar-box '>
                 <div className='avatar ' id='avatar-placeholder'><img src={avatar1} alt="avatar" id='avatar' />
-                  <p className="card-text" id='Dio'>Assistant DioDio</p> 
+                  <p className="card-text" id='Dio'>DioDio AI Assistant</p> 
                 </div>
                 <div className='box n1' id='question'>
                   {currentQuestionIndex === 8
