@@ -31,7 +31,7 @@
 
 .social-icon__link {
     font-size: 2rem;
-    color: #fff;
+    color: black;
     margin: 0 8px;
     display: inline-block;
     transition: 0.5s;
@@ -44,7 +44,7 @@
 
 .menu__link {
     font-size: 1.2rem;
-    color: #fff;
+    color: black;
     margin: 0 8px;
     display: inline-block;
     transition: 0.5s;
@@ -58,7 +58,7 @@
 }
 
 .footer p {
-    color: #fff;
+    color: black;
     margin: 16px 0 8px 0;
     font-size: 1rem;
     font-weight: 300;

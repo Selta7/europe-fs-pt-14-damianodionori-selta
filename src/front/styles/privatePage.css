@@ -216,6 +216,12 @@ label {
     overflow-x: scroll;
     max-width: 536px;
   }
+  
+  #itimap {
+    margin: 8px;
+    min-width: 500px;
+    background-color: white;
+  }
   #mapday{
     min-width: 500px;
     margin-right: 16px;
